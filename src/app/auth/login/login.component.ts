@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+public model :any = {};
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  loginForm() {
+    console.table(this.model);
+  }
 }

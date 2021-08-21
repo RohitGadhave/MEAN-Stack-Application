@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Login } from '../shared/interface/login';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,8 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   constructor() { }
+
+  login(model: Login) {
+console.log(model);
+  }
 }

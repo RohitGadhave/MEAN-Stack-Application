@@ -22,4 +22,7 @@ export class RegisterComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     console.warn(this.registerForm.value);
   }
+  get form(){
+    return this.registerForm.controls
+  }
 }

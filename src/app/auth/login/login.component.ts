@@ -10,7 +10,7 @@ import { Login } from 'src/app/shared/interface/login';
 export class LoginComponent implements OnInit {
   public model: any = {};
   public logInFormModel: FormGroup;
-
+public error:any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
@@ -31,7 +31,10 @@ export class LoginComponent implements OnInit {
       email: this.logInFormModel.value.email,
       password: this.logInFormModel.value.password
     }
-    this.authService.login(model);
+    this.authService.login(model).subscribe((value)=>{
+      console.log(value);
+    },(error)=>{console.warn(JSON.stringify(error.error));
+    this.error=error.error});
 
   }
 get Form(){

@@ -1,4 +1,5 @@
 <div class="container">
+  <div *ngIf="error">{{error.error.message }}</div>
     <form (ngSubmit)="loginForm()" [formGroup]="logInFormModel">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -17,5 +18,4 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-      {{Form.password.invalid  && (Form.password.dirty || Form.password.touched)}}
 </div>

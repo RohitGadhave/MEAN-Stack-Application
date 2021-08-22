@@ -10,20 +10,23 @@ import { Login } from 'src/app/shared/interface/login';
 export class LoginComponent implements OnInit {
   public model: any = {};
   public logInFormModel: FormGroup;
-public error:any;
+  public error: any;
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private _authService: AuthService) {
+    
+  }
 
   ngOnInit(): void {
     this.logInFormModel = new FormGroup({
       'email': new FormControl(null, [Validators.email, Validators.required]),
-      'password': new FormControl(null, [Validators.required,Validators.minLength(6),Validators.maxLength(20)])
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(20)])
     });
+    //this._authService.setCurrentUserValue();
   }
   loginForm() {
-    console.table(this.logInFormModel);
+    //console.table(this.logInFormModel);
     if (this.logInFormModel.status === 'INVALID') {
       return false;
     }
@@ -31,14 +34,17 @@ public error:any;
       email: this.logInFormModel.value.email,
       password: this.logInFormModel.value.password
     }
-    this.authService.login(model).subscribe((value)=>{
-      console.log(value);
-    },(error)=>{console.warn(JSON.stringify(error.error));
-    this.error=error.error});
+    this.authService.login(model).subscribe((value) => {
+      //console.log(JSON.stringify(value));
+      //console.warn(this.authService.currentUserValue)
+    }, (error) => {
+      console.warn(JSON.stringify(error.error));
+      this.error = error.error
+    });
 
   }
-get Form(){
-  //console.warn(this.logInFormModel.controls.email);
-  return this.logInFormModel.controls;
-}
+  get Form() {
+    //console.warn(this.logInFormModel.controls.email);
+    return this.logInFormModel.controls;
+  }
 }

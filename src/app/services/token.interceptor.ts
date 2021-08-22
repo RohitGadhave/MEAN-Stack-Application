@@ -7,13 +7,34 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { HelperService } from './helper.service';
+import { AuthService } from './auth.service';
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private _helperService: HelperService, private authService: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(JSON.stringify(request));
+    const accessToken = this._helperService.accessToken;
+    const refreshAccessToken = this._helperService.refreshAccessToken;
+    const user = this._helperService.currentUser;
+    //console.table(user)
+    if (user && accessToken && refreshAccessToken) {
+      const JWThelper = new JwtHelperService();
+
+      //const decodedToken = JWThelper.decodeToken(accessToken);
+      //const expirationDate = JWThelper.getTokenExpirationDate(accessToken);
+      const isExpired = JWThelper.isTokenExpired(accessToken);
+      //console.warn('accessToken ', decodedToken,expirationDate,isExpired);
+      //if token expired then refresh the token
+      if (isExpired) {
+        this.authService.refreshToken().subscribe(res=>{},err=>{console.warn(err)});
+      }
+    }
+
+    //console.log(JSON.stringify(request));
     return next.handle(request);
   }
 }

@@ -3,7 +3,7 @@ import { Login } from '../shared/interface/login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { StorageService } from './storage.service';
 import { HelperService } from './helper.service';
 @Injectable({
@@ -70,16 +70,11 @@ export class AuthService {
     }
 
   }
-  refreshToken():Observable<any> {
-    let refreshAccessToken = this._helperService.refreshAccessToken;
+  refreshToken(refreshAccessToken :string):Observable<any> {
+    //let refreshAccessToken = this._helperService.refreshAccessToken;
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.httpClient.post(this.apiUrl + this.endpointversion + 'api/auth/refresh-token', { refreshAccessToken }, { headers })
-      .pipe(map((res:any)=>{
-        this._helperService.accessToken = res.accessToken
-        this._storage.setData('accessToken', res.accessToken);
-        return res;
-      }));
+    return this.httpClient.post(this.apiUrl + this.endpointversion + 'api/auth/refresh-token', { refreshAccessToken });
   }
 }

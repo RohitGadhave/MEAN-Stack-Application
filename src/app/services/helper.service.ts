@@ -10,38 +10,38 @@ export class HelperService {
   private refreshAccessTokenSubject$: BehaviorSubject<string> = new BehaviorSubject<string>("");
   private currentUserSubject$: BehaviorSubject<string> = new BehaviorSubject<string>("");
   constructor(private _storage: StorageService) {
-    
+
   }
 
   public get accessToken() {
-    let accessToken= this.accessTokenSubject$.value;
-    if(!accessToken){
+    let accessToken = this.accessTokenSubject$.value;
+    if (!accessToken) {
       //set accessToken
-      console.log('accessToken set');
-      this.accessToken = this._storage.getDate('accessToken');
-      accessToken= this.accessTokenSubject$.value;
+      console.log('accessToken get');
+      this.accessToken = this._storage.getDate('accessToken') || null;
+      accessToken = this.accessTokenSubject$.value;
     }
     return accessToken;
   }
 
   public get refreshAccessToken() {
-    let refreshAccessToken= this.refreshAccessTokenSubject$.value;
-    if(!refreshAccessToken){
+    let refreshAccessToken = this.refreshAccessTokenSubject$.value;
+    if (!refreshAccessToken) {
       //set refreshAccessToken
-      console.log('refreshAccessToken set');
-      this.refreshAccessToken = this._storage.getDate('refreshAccessToken');
-      refreshAccessToken= this.refreshAccessTokenSubject$.value;
+      console.log('refreshAccessToken get');
+      this.refreshAccessToken = this._storage.getDate('refreshAccessToken') || null;
+      refreshAccessToken = this.refreshAccessTokenSubject$.value;
     }
     return refreshAccessToken;
   }
 
   public get currentUser() {
     //set currentUser
-      console.log('currentUser set');
-    let currentUser= this.currentUserSubject$.value;
-    if(!currentUser){
-      this.currentUser = this._storage.getDate('user');
-      currentUser= this.currentUserSubject$.value;
+    console.log('currentUser get');
+    let currentUser = this.currentUserSubject$.value;
+    if (!currentUser) {
+      this.currentUser = this._storage.getDate('user') || null;
+      currentUser = this.currentUserSubject$.value;
     }
     return currentUser;
   }

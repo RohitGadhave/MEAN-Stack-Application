@@ -1,1 +1,5 @@
-<p>users works!</p>
+<button class="btn btn-primary" (click)="getUsers()">All user</button>
+
+<ng-container *ngFor="let item of data">
+    <p>{{item.email}}</p><br>
+</ng-container>

@@ -23,14 +23,18 @@ export class TokenInterceptor implements HttpInterceptor {
     //console.table(user)
     if (user && accessToken && refreshAccessToken) {
       const JWThelper = new JwtHelperService();
-
+      
       //const decodedToken = JWThelper.decodeToken(accessToken);
       //const expirationDate = JWThelper.getTokenExpirationDate(accessToken);
       const isExpired = JWThelper.isTokenExpired(accessToken);
-      //console.warn('accessToken ', decodedToken,expirationDate,isExpired);
+      console.warn(isExpired);
       //if token expired then refresh the token
       if (isExpired) {
-        this.authService.refreshToken().subscribe(res=>{},err=>{console.warn(err)});
+        console.log(JSON.stringify(request));
+        //this.authService.refreshToken().subscribe(res=>{},err=>{console.warn(err)});
+      }
+      else{
+        return next.handle(request.clone({setHeaders:{"Authorization":`Bearer ${accessToken}`}}));
       }
     }
 

@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PagesComponent } from './pages.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'user',
     component: PagesComponent
   },
   {
-    path: 'user',
-    loadChildren:()=>import('./new-user/new-user.module').then(m=>m.NewUserModule)
+    path: '',
+    component:UsersComponent
   }
 ];
 

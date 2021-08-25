@@ -23,7 +23,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
     console.log(model);
-    return this.httpClient.post(this.apiUrl + this.endpointversion + 'api/auth/signin', model, { headers })
+    return this.httpClient.post(this.apiUrl + this.endpointversion + 'api/auth/signin', model)
       .pipe(map((res: any) => {
         if (res.user && res.accessToken && res.refreshAccessToken) {
           this._helperService.accessToken = res.accessToken

@@ -12,8 +12,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { TestTryPipe } from './shared/pipe/test-try.pipe';
-import { AuthService, StorageService } from './services/index';
+import { AuthService, StorageService, UserService } from './services/index';
 import { TokenInterceptor } from './services/token.interceptor';
+import { HeaderInterceptor } from './services/header.interceptor';
 
 
 
@@ -33,9 +34,11 @@ import { TokenInterceptor } from './services/token.interceptor';
     HttpClientModule,
   ],
   providers: [
+    UserService,
     StorageService,
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

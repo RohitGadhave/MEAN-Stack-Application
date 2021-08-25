@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services';
+import { UserService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.pages={
-      "page":"0", "size":"10"
+      "page":"0", "size":"15"
     }
   }
   getUsers() {

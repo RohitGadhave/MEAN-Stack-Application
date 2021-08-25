@@ -8,10 +8,10 @@ import {
 import { Observable } from 'rxjs';
 
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { HelperService } from './helper.service';
-import { AuthService } from './auth.service';
+import { HelperService } from '../services/helper.service';
+import { AuthService } from '../services/auth.service';
 import { switchMap } from 'rxjs/operators';
-import { StorageService } from '.';
+import { StorageService } from '../services';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

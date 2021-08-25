@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Login } from '../shared/interface/login';
+import { Login } from '../interface/login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';

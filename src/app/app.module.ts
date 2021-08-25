@@ -12,9 +12,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 import { TestTryPipe } from './shared/pipe/test-try.pipe';
-import { AuthService, StorageService, UserService } from './services/index';
-import { TokenInterceptor } from './services/token.interceptor';
-import { HeaderInterceptor } from './services/header.interceptor';
+import { AuthService, StorageService, UserService } from './shared/services/index';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { HeaderInterceptor } from './shared/interceptors/header.interceptor';
 
 
 
